@@ -43,7 +43,8 @@ export default {
                 {label: 'Text', value: 'Text'},
                 {label: 'Integer',value: 'Integer'},
                 {label: 'Float', value: 'Float'},
-                {label: 'Link', value: 'Link'}
+                {label: 'Link', value: 'Link'},
+                {label: 'TextArea', value: 'TextArea'}
             ]
         }, 
         makeRequiredRule(),

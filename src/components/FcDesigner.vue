@@ -242,10 +242,6 @@
     </ElContainer>
 </template>
 
-<style>
-
-</style>
-
 <script>
 
 import form from '../config/base/form';
@@ -261,6 +257,7 @@ import {upper, useLocale} from '../utils/index';
 import {designerForm} from '../utils/form';
 import viewForm from '../utils/form';
 import {computed, reactive, toRefs, ref, getCurrentInstance, provide, nextTick, watch, defineComponent, onMounted} from 'vue';
+import { err } from '@form-create/utils/lib/console';
 
 export default defineComponent({
     name: 'FcDesigner',
@@ -511,14 +508,12 @@ export default defineComponent({
                 })]);
             },
             previewFc() {
-                console.log(data.preview.rule)
-                console.log(data.preview)
                 data.preview.state = true;
                 data.preview.rule = methods.getRule();
                 data.preview.option = methods.getOption();
             },
             saveFc() {
-                fetch('http://localhost:8888/formCreateDesignerServlet', {
+                fetch('http://127.0.0.1:8888/formCreateDesignerServlet', {
                   method: 'POST',
                   credentials: 'include',
                   headers: {
@@ -533,8 +528,12 @@ export default defineComponent({
                   .then(response => response.json())
                   .then(data => {
                     // 处理响应数据
-                    console.log(data);
-                    this.fetchFc();
+                    if(data.status==201){
+                        alert(data.data);
+                    }else{
+                        alert(data.data);
+                        methods.fetchFc();
+                    }
                   })
                   .catch(error => {
                     // 处理错误
@@ -542,7 +541,7 @@ export default defineComponent({
                   });
             },
             fetchFc(){
-                fetch('http://localhost:8888/formCreateDesignerServlet?parentId=' + data.parentId, {
+                fetch('http://127.0.0.1:8888/formCreateDesignerServlet?parentId=' + data.parentId, {
                   method: 'GET',
                   credentials: 'include',
                   headers: {
@@ -552,8 +551,8 @@ export default defineComponent({
                   .then(response => response.json())
                   .then(res => {
                     // 处理响应数据
-                    this.setRule(res.data.Rule);
-                    this.setOption(res.data.Options);
+                    methods.setRule(res.data.Rule);
+                    methods.setOption(res.data.Options);
                   })
                   .catch(error => {
                     // 处理错误

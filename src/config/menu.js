@@ -43,7 +43,7 @@ export default function createMenu({t}) {
             name: 'layout',
             title: t('menu.layout'),
             list: [
-                row, tab, space
+                row, space
             ]
         },
     ];
