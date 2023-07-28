@@ -1,14 +1,17 @@
 <template>
     <div id="app">
         <div class="_fc-t-header">
-            <img class="_fc-t-logo" src="http://form-create.com/logo.png">
-            <div class="_fc-t-name">form-create-designer</div>
+        <a href="https://internet3.com.cn/gwdi">
+            <img class="_fc-t-logo" src="https://internet3.com.cn/frontend/assets/logo.1d82ff7f.png">
+        </a>
+
+            <div class="_fc-t-name">表单设计器</div>
             <div class="_fc-t-menu">
-                <el-button size="small" @click="setJson"> 导入JSON</el-button>
-                <el-button size="small" @click="setOption"> 导入Options</el-button>
-                <el-button size="small" type="primary" @click="showJson">生成JSON</el-button>
-                <el-button size="small" type="success" @click="showOption">生成Options</el-button>
-                <el-button size="small" type="danger" @click="showTemplate">生成组件</el-button>
+                <el-button size="small" @click="setJson"> 导入组件JSON</el-button>
+                <el-button size="small" @click="setOption"> 导入样式JSON</el-button>
+                <el-button size="small" type="primary" @click="showJson">生成组件JSON</el-button>
+                <el-button size="small" type="success" @click="showOption">生成样式JSON</el-button>
+                <el-button size="small" type="danger" @click="showTemplate">生成vue组件</el-button>
                 <el-button size="small" @click="changeLocale">中英切换</el-button>
             </div>
         </div>
@@ -76,7 +79,7 @@ import ZhCn from "../src/locale/zh-cn";
 import En from "../src/locale/en";
 
 
-const TITLE = ['生成规则', '表单规则', '生成组件', '设置生成规则', '设置表单规则'];
+const TITLE = ['组件JSON', '样式JSON', '生成vue组件', '设置组件JSON', '设置样式JSON'];
 
 export default {
     name: 'app',

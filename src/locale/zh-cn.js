@@ -83,7 +83,7 @@ const ZhCn = {
         clearConfirmTitle: '清空后将不能恢复，确定要清空吗？',
         config: {
             component: '组件配置',
-            form: '表单配置',
+            form: '样式配置',
             rule: '基础配置',
             props: '属性配置',
             validate: '验证配置',
