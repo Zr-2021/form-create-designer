@@ -19,7 +19,8 @@
         "rollup": "rollup -c ./rollup.config.ts",
         "build": "vite build --config ./vite.config.build.js",
         "build:locale": "gulp -f gulpfile.js",
-        "build:preview": "vite build --config ./vite.config.preview.js"
+        "build:preview": "vite build --config ./vite.config.preview.js",
+        "mybuild": "vue-cli-service build --mode prod"
     },
     "repository": {
         "type": "git",

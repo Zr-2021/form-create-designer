@@ -50,6 +50,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: '/formcreate/',
     build: {
         lib: {
             entry: 'src/index.js',
@@ -81,5 +82,21 @@ export default defineConfig({
             ]
         }
     },
-    plugins: [vue(),  vueJSX(), banner(getBanner(__banner__)),cssInjectedByJsPlugin(), ...extnedsPlugins]
+    plugins: [vue(),  vueJSX(), banner(getBanner(__banner__)),cssInjectedByJsPlugin(), ...extnedsPlugins],
+    // 配置前端服务地址和端口
+    server: {
+        host: '127.0.0.1',
+        port: 8009,
+        // 是否开启 https
+        https: false,
+    },
+    // 设置反向代理，跨域
+    proxy: {
+        '/api': {
+            // 后台地址
+            target: 'https://www.internet3.com.cn/',
+            changeOrigin: true,
+            rewrite: path => path.replace(/^\/api/, '')
+        }
+    }
 })

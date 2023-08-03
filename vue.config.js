@@ -7,6 +7,7 @@
  * @FilePath     : /form-create2/packages/element-ui/vue.config.js
  */
 module.exports = {
+    publicPath:'/formCreate',
     pages: {
         app: {
             entry: 'examples/main.js',

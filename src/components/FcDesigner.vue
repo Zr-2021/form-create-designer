@@ -257,7 +257,7 @@ import {upper, useLocale} from '../utils/index';
 import {designerForm} from '../utils/form';
 import viewForm from '../utils/form';
 import {computed, reactive, toRefs, ref, getCurrentInstance, provide, nextTick, watch, defineComponent, onMounted} from 'vue';
-import { err } from '@form-create/utils/lib/console';
+import {err} from '@form-create/utils/lib/console';
 
 export default defineComponent({
     name: 'FcDesigner',
@@ -513,51 +513,51 @@ export default defineComponent({
                 data.preview.option = methods.getOption();
             },
             saveFc() {
-                fetch('http://127.0.0.1:8888/formCreateDesignerServlet', {
-                  method: 'POST',
-                  credentials: 'include',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    parentId: data.parentId,
-                    Rule: methods.getRule(),
-                    Options: methods.getOption()
-                  })
+                fetch(`${process.env.VUE_APP_BASE_URL}/gwdi/formCreateDesignerServlet`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        parentId: data.parentId,
+                        Rule: methods.getRule(),
+                        Options: methods.getOption()
+                    })
                 })
-                  .then(response => response.json())
-                  .then(data => {
+                    .then(response => response.json())
+                    .then(data => {
                     // 处理响应数据
-                    if(data.status==201){
-                        alert(data.data);
-                    }else{
-                        alert(data.data);
-                        methods.fetchFc();
-                    }
-                  })
-                  .catch(error => {
+                        if(data.status==201){
+                            alert(data.data);
+                        }else{
+                            alert(data.data);
+                            methods.fetchFc();
+                        }
+                    })
+                    .catch(error => {
                     // 处理错误
-                    console.error(error);
-                  });
+                        console.error(error);
+                    });
             },
             fetchFc(){
-                fetch('http://127.0.0.1:8888/formCreateDesignerServlet?parentId=' + data.parentId, {
-                  method: 'GET',
-                  credentials: 'include',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
+                fetch(`${process.env.VUE_APP_BASE_URL}/gwdi/formCreateDesignerServlet?parentId=` + data.parentId, {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                 })
-                  .then(response => response.json())
-                  .then(res => {
+                    .then(response => response.json())
+                    .then(res => {
                     // 处理响应数据
-                    methods.setRule(res.data.Rule);
-                    methods.setOption(res.data.Options);
-                  })
-                  .catch(error => {
+                        methods.setRule(res.data.Rule);
+                        methods.setOption(res.data.Options);
+                    })
+                    .catch(error => {
                     // 处理错误
-                    console.error(error);
-                  });
+                        console.error(error);
+                    });
             },
             getRule() {
                 return methods.parseRule(deepCopy(data.dragForm.api.rule[0].children));
