@@ -140,6 +140,12 @@
 ._fc-m-drag > form, ._fc-m-drag > form > .el-row {
     height: 100%;
 }
+
+._fc-m-schema {
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
 </style>
 
 <template>
@@ -170,6 +176,12 @@
                 <ElContainer class="_fc-m">
                     <el-header class="_fc-m-tools" height="45">
                         <slot name="handle"></slot>
+                        <div class="_fc-m-schema">
+                            <el-input v-model="schemaName" placeholder="请输入模型名"/>
+                            <el-button type="warning" plain round size="small"
+                                   @click="saveAsFc"><i class="fc-icon icon-save"></i> {{ t('designer.saveAs') }}
+                            </el-button>
+                        </div>
                         <el-button type="primary" plain round size="small"
                                    @click="previewFc"><i class="fc-icon icon-preview"></i> {{ t('designer.preview') }}
                         </el-button>
@@ -258,6 +270,7 @@ import {designerForm} from '../utils/form';
 import viewForm from '../utils/form';
 import {computed, reactive, toRefs, ref, getCurrentInstance, provide, nextTick, watch, defineComponent, onMounted} from 'vue';
 import {err} from '@form-create/utils/lib/console';
+import {ElInput, ElText} from 'element-plus';
 
 export default defineComponent({
     name: 'FcDesigner',
@@ -265,6 +278,8 @@ export default defineComponent({
         draggable,
         DragForm: designerForm.$form(),
         ViewForm: viewForm.$form(),
+        ElText,
+        ElInput
     },
     props: ['menu', 'height', 'config', 'mask', 'locale'],
     setup(props) {
@@ -281,6 +296,7 @@ export default defineComponent({
         const t = useLocale(locale).t;
         const data = reactive({
             parentId: new URLSearchParams(window.location.search).get('parentId'),
+            schemaName: new URLSearchParams(window.location.search).get('schemaName'),
             cacheProps: {},
             moveRule: null,
             addRule: null,
@@ -512,26 +528,65 @@ export default defineComponent({
                 data.preview.rule = methods.getRule();
                 data.preview.option = methods.getOption();
             },
-            saveFc() {
-                fetch(`${process.env.VUE_APP_BASE_URL}/gwdi/formCreateDesignerServlet`, {
+            saveAsFc() {
+                // fetch(`${process.env.VUE_APP_BASE_URL}/gwdi/formCreateDesignerServlet`, {
+                fetch('http://127.0.0.1:8888/formCreateSaveAsServlet', {
                     method: 'POST',
                     credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        schemaName: data.schemaName,
+                        Rule: methods.getRule(),
+                        Options: methods.getOption()
+                    })
+                })
+                    .then(response => response.json())
+                    .then(resData => {
+                    // 处理响应数据
+                        if(resData.status==201){
+                            alert(resData.data);
+                        }else if(resData.status==202){
+                            alert('模型已存在,请修改模型名')
+                        }else{
+                            alert(resData.data);
+                            data.parentId = resData.parentId;
+                            methods.fetchFc();
+                        }
+                    })
+                    .catch(error => {
+                    // 处理错误
+                        console.error(error);
+                    });
+            },
+            saveFc() {
+                // fetch(`${process.env.VUE_APP_BASE_URL}/gwdi/formCreateDesignerServlet`, {
+                fetch('http://127.0.0.1:8888/formCreateDesignerServlet', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        schemaName: data.schemaName,
                         parentId: data.parentId,
                         Rule: methods.getRule(),
                         Options: methods.getOption()
                     })
                 })
                     .then(response => response.json())
-                    .then(data => {
+                    .then(resData => {
                     // 处理响应数据
-                        if(data.status==201){
-                            alert(data.data);
+                        if(resData.status==201){
+                            alert(resData.data);
+                        }else if(resData.status==202){
+                            alert('模型已存在,请修改模型名')
+                        }else if(resData.status==203){
+                            alert('模型名不能为空!')
                         }else{
-                            alert(data.data);
+                            alert(resData.data);
+                            data.parentId = resData.parentId;
                             methods.fetchFc();
                         }
                     })
@@ -541,7 +596,8 @@ export default defineComponent({
                     });
             },
             fetchFc(){
-                fetch(`${process.env.VUE_APP_BASE_URL}/gwdi/formCreateDesignerServlet?parentId=` + data.parentId, {
+                // fetch(`${process.env.VUE_APP_BASE_URL}/gwdi/formCreateDesignerServlet?parentId=` + data.parentId, {
+                fetch('http://127.0.0.1:8888/formCreateDesignerServlet?parentId=' + data.parentId, {
                     method: 'GET',
                     credentials: 'include',
                     headers: {

@@ -75,6 +75,7 @@ const ZhCn = {
         parseValidate: '请输入正确的解析函数',
     },
     designer: {
+        saveAs:'另存为',
         preview: '预 览',
         save: '保 存',
         clear: '清 空',

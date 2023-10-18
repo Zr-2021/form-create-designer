@@ -75,6 +75,7 @@ const En = {
         parseValidate: 'Please enter the correct parsing function',
     },
     designer: {
+        saveAs:'save as',
         preview: 'Preview',
         save: 'Save',
         clear: 'Clear',
