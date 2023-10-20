@@ -165,3 +165,7 @@ export default {
 [MIT](http://opensource.org/licenses/MIT)
 
 Copyright (c) 2021-present xaboy
+
+
+## 打包到tomcat命令
+npm run mybuild
