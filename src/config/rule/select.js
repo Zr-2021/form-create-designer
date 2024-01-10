@@ -54,11 +54,12 @@ export default {
             maketabIndexRule(),
             
 
-            {type: 'switch', field: 'multiple', title: '是否多选'}, {
-                type: 'switch',
-                field: 'disabled',
-                title: '是否禁用'
-            }, {type: 'switch', field: 'clearable', title: '是否可以清空选项'}, {
+            // {type: 'switch', field: 'multiple', title: '是否多选'}, {
+            //     type: 'switch',
+            //     field: 'disabled',
+            //     title: '是否禁用'
+            // }, {type: 'switch', field: 'clearable', title: '是否可以清空选项'}, 
+            {
                 type: 'switch',
                 field: 'collapseTags',
                 title: '多选时是否将选中值按文字的形式展示'
@@ -91,6 +92,7 @@ export default {
                 field: 'popperAppendToBody',
                 title: '是否将弹出框插入至 body 元素',
                 value: true
-            }, {type: 'switch', field: 'automaticDropdown', title: '对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单'}])
+            }, {type: 'switch', field: 'automaticDropdown', title: '对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单'}
+        ])
     }
 };

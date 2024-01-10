@@ -563,6 +563,7 @@ export default defineComponent({
             },
             saveFc() {
                 // fetch(`${process.env.VUE_APP_BASE_URL}/gwdi/formCreateDesignerServlet`, {
+                // fetch('http://127.0.0.1:8888/formCreateDesignerServlet', {
                 fetch('/gwdi/formCreateDesignerServlet', {
                     method: 'POST',
                     credentials: 'include',
@@ -598,6 +599,7 @@ export default defineComponent({
             },
             fetchFc(){
                 // fetch(`${process.env.VUE_APP_BASE_URL}/gwdi/formCreateDesignerServlet?parentId=` + data.parentId, {
+                // fetch('http://127.0.0.1:8888/formCreateDesignerServlet?parentId=' + data.parentId, {
                 fetch('/gwdi/formCreateDesignerServlet?parentId=' + data.parentId, {
                     method: 'GET',
                     credentials: 'include',

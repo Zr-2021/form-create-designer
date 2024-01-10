@@ -37,10 +37,11 @@ export default {
             maketabNameRule(),
             maketabIndexRule(),
             
-            {
-            type: 'switch',
-            field: 'disabled',
-            title: '是否禁用'
-        }]);
+            // {
+            //     type: 'switch',
+            //     field: 'disabled',
+            //     title: '是否禁用'
+            // }
+        ]);
     }
 };

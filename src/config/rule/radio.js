@@ -32,7 +32,8 @@ export default {
         return localeProps(t, name + '.props', [
             makeRequiredRule(),
             makeOptionsRule(t, 'options'),
-            {type: 'switch', field: 'disabled', title: '是否禁用'}, {
+            // {type: 'switch', field: 'disabled', title: '是否禁用'}, 
+            {
                 type: 'switch',
                 field: 'type',
                 title: '按钮形式',

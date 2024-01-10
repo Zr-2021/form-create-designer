@@ -1,7 +1,7 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeProps, makeOptionsRule, makeRequiredRule, makedefaultValueRule, 
-        maketitleWidthRule, makeinputWidthRule, makehelpFieldRule,
-        makeisShowHelpFieldRule, maketabNameRule, maketabIndexRule} from '../../utils/index';
+    maketitleWidthRule, makeinputWidthRule, makehelpFieldRule,
+    makeisShowHelpFieldRule, maketabNameRule, maketabIndexRule} from '../../utils/index';
 
 const label = '多选框';
 const name = 'checkbox';
@@ -53,7 +53,9 @@ export default {
                 field: 'type',
                 title: '按钮类型',
                 props: {activeValue: 'button', inactiveValue: 'default'}
-            }, {type: 'switch', field: 'disabled', title: '是否禁用'}, {
+            },
+            // , {type: 'switch', field: 'disabled', title: '是否禁用'}, 
+            {
                 type: 'inputNumber',
                 field: 'min',
                 title: '可被勾选的 checkbox 的最小数量',

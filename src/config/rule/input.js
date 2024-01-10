@@ -1,7 +1,7 @@
 import uniqueId from '@form-create/utils/lib/unique';
 import {localeProps, makeRequiredRule, makedefaultValueRule, makerefRule, makerefvalRule, makefuncRule,
-        makelogicalFuncRule, maketitleWidthRule, makeinputWidthRule, makehelpFieldRule,
-        makeisShowHelpFieldRule, maketabNameRule, maketabIndexRule} from '../../utils';
+    makelogicalFuncRule, maketitleWidthRule, makeinputWidthRule, makehelpFieldRule,
+    makeisShowHelpFieldRule, maketabNameRule, maketabIndexRule} from '../../utils';
 
 const label = '输入框';
 const name = 'input';
@@ -74,7 +74,9 @@ export default {
             type: 'switch',
             field: 'showPassword',
             title: '是否显示切换密码图标'
-        }, {type: 'switch', field: 'disabled', title: '禁用'}, {
+        }, 
+        // {type: 'switch', field: 'disabled', title: '禁用'},
+        {
             type: 'input',
             field: 'prefixIcon',
             title: '输入框头部图标'
@@ -89,7 +91,9 @@ export default {
             field: 'autocomplete',
             title: '自动补全',
             options: [{label: 'on', value: 'on'}, {label: 'off', value: 'off'}]
-        }, {type: 'switch', field: 'readonly', title: '是否只读'}, {
+        }, 
+        // {type: 'switch', field: 'readonly', title: '是否只读'}, 
+        {
             type: 'select',
             field: 'resize',
             title: '控制是否能被用户缩放',
@@ -98,6 +102,6 @@ export default {
                 value: 'horizontal'
             }, {label: 'vertical', value: 'vertical'}]
         }, {type: 'switch', field: 'autofocus', title: '自动获取焦点'}
-    ]);
+        ]);
     }
 };
